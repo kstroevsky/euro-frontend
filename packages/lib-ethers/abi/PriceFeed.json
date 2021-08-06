@@ -46,6 +46,32 @@
   },
   {
     "inputs": [],
+    "name": "BAND_VALID_UPDATE_INTERVAL_FOR_BROKEN",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "BAND_VALID_UPDATE_INTERVAL_FOR_FROZEN",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "DECIMAL_PRECISION",
     "outputs": [
       {
@@ -59,7 +85,20 @@
   },
   {
     "inputs": [],
-    "name": "ETHUSD_TELLOR_REQ_ID",
+    "name": "EUR_TIMEOUT",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MATIC_TIMEOUT",
     "outputs": [
       {
         "internalType": "uint256",
@@ -114,9 +153,9 @@
     "name": "TARGET_DIGITS",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint8",
         "name": "",
-        "type": "uint256"
+        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -124,12 +163,12 @@
   },
   {
     "inputs": [],
-    "name": "TELLOR_DIGITS",
+    "name": "TARGET_EUR_DIGITS",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint8",
         "name": "",
-        "type": "uint256"
+        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -137,12 +176,51 @@
   },
   {
     "inputs": [],
-    "name": "TIMEOUT",
+    "name": "TARGET_MATIC_DIGITS",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint8",
         "name": "",
-        "type": "uint256"
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "bandCaller",
+    "outputs": [
+      {
+        "internalType": "contract IStdReference",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "bandCallerAddressSetter",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "eurPriceAggregator",
+    "outputs": [
+      {
+        "internalType": "contract AggregatorV3Interface",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -189,6 +267,19 @@
   },
   {
     "inputs": [],
+    "name": "maticPriceAggregator",
+    "outputs": [
+      {
+        "internalType": "contract AggregatorV3Interface",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "owner",
     "outputs": [
       {
@@ -201,32 +292,37 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "priceAggregator",
-    "outputs": [
+    "inputs": [
       {
-        "internalType": "contract AggregatorV3Interface",
-        "name": "",
+        "internalType": "address",
+        "name": "_maticPriceAggregatorAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_eurPriceAggregatorAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_bandCallerAddress",
         "type": "address"
       }
     ],
-    "stateMutability": "view",
+    "name": "setAddresses",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
       {
         "internalType": "address",
-        "name": "_priceAggregatorAddress",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_tellorCallerAddress",
+        "name": "_bandCallerAddress",
         "type": "address"
       }
     ],
-    "name": "setAddresses",
+    "name": "setBandCallerAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -239,19 +335,6 @@
         "internalType": "enum PriceFeed.Status",
         "name": "",
         "type": "uint8"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "tellorCaller",
-    "outputs": [
-      {
-        "internalType": "contract ITellorCaller",
-        "name": "",
-        "type": "address"
       }
     ],
     "stateMutability": "view",
