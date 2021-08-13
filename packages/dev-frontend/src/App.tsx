@@ -92,7 +92,7 @@ const App = () => {
         <Icon name="exclamation-triangle" /> Liquity is not yet deployed to{" "}
         {chainId === 1 ? "mainnet" : "this network"}.
       </Heading>
-      Please switch to Ropsten, Rinkeby, Kovan or Görli.
+      This chainId is {chainId}. Please switch to supported network.
     </Flex>
   );
 

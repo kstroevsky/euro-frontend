@@ -34,7 +34,7 @@ const wsParams = (network: string, infuraApiKey: string): [string, string] => [
   network
 ];
 
-const supportedNetworks = ["homestead", "kovan", "rinkeby", "ropsten", "goerli"];
+const supportedNetworks = ["homestead", "kovan", "rinkeby", "ropsten", "goerli", "hardhat"];
 
 export const LiquityProvider: React.FC<LiquityProviderProps> = ({
   children,
@@ -44,6 +44,10 @@ export const LiquityProvider: React.FC<LiquityProviderProps> = ({
 }) => {
   const { library: provider, account, chainId } = useWeb3React<Web3Provider>();
   const [config, setConfig] = useState<LiquityFrontendConfig>();
+  console.log("!config", config)
+  console.log("!provider", provider)
+  console.log("!account", account)
+  console.log("!chainId", chainId)
 
   const connection = useMemo(() => {
     if (config && provider && account && chainId) {
@@ -71,6 +75,7 @@ export const LiquityProvider: React.FC<LiquityProviderProps> = ({
 
       if (isWebSocketAugmentedProvider(provider)) {
         const network = getNetwork(chainId);
+        console.log('network.name', network.name)
 
         if (network.name && supportedNetworks.includes(network.name) && config.infuraApiKey) {
           provider.openWebSocket(...wsParams(network.name, config.infuraApiKey));

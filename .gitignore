@@ -7,7 +7,7 @@
 node_modules
 
 # output of TypeScript transpilation
-/packages/*/dist
+# /packages/*/dist
 
 # api-extractor temp files
 /packages/*/temp
