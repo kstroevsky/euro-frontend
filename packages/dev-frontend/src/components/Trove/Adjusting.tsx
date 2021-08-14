@@ -10,7 +10,7 @@ import {
 } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
 
-import { useStableTroveChange } from "../../hooks/useStableTroveChange";
+import { useStableTroveChange } from "../../hooks/useStableTroveChanges";
 import { ActionDescription } from "../ActionDescription";
 import { useMyTransactionState } from "../Transaction";
 import { TroveAction } from "./TroveAction";

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Flex, Container } from "theme-ui";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { Wallet } from "@ethersproject/wallet";
@@ -11,6 +11,8 @@ import { TransactionMonitor } from "./components/Transaction";
 import { UserAccount } from "./components/UserAccount";
 import { SystemStatsPopup } from "./components/SystemStatsPopup";
 import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+import { WaveComponent } from './components/WaveComponent'
 
 import { PageSwitcher } from "./pages/PageSwitcher";
 import { Farm } from "./pages/Farm";
@@ -22,11 +24,15 @@ import { StabilityViewProvider } from "./components/Stability/context/StabilityV
 import { StakingViewProvider } from "./components/Staking/context/StakingViewProvider";
 import { FarmViewProvider } from "./components/Farm/context/FarmViewProvider";
 
+import { ThemeContext } from './App';
+
 type LiquityFrontendProps = {
   loader?: React.ReactNode;
 };
 export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
   const { account, provider, liquity } = useLiquity();
+
+  const themer = useContext(ThemeContext);
 
   // For console tinkering ;-)
   Object.assign(window, {
@@ -46,12 +52,12 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
           <StabilityViewProvider>
             <StakingViewProvider>
               <FarmViewProvider>
-                <Flex sx={{ flexDirection: "column", minHeight: "100%" }}>
+                <Flex sx={{ flexDirection: "column", minHeight: "100%"}}>
                   <Header>
                     <UserAccount />
                     <SystemStatsPopup />
                   </Header>
-
+                  <WaveComponent width={window.innerWidth} height={window.innerHeight*1.2}/>
                   <Container
                     variant="main"
                     sx={{
@@ -65,17 +71,18 @@ export const LiquityFrontend: React.FC<LiquityFrontendProps> = ({ loader }) => {
                       <Route path="/" exact>
                         <PageSwitcher />
                       </Route>
-                      <Route path="/farm">
+                      <Route path="/save">
                         <Farm />
                       </Route>
                       <Route path="/risky-troves">
                         <RiskyTrovesPage />
                       </Route>
-                      <Route path="/redemption">
+                      <Route path="/pools">
                         <RedemptionPage />
                       </Route>
                     </Switch>
                   </Container>
+                  <Footer/>
                 </Flex>
               </FarmViewProvider>
             </StakingViewProvider>

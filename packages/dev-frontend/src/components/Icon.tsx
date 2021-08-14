@@ -75,7 +75,7 @@ const getIcon = (name: IconName): IconProp => {
   }
 };
 
-export type IconProps = Pick<FontAwesomeIconProps, "style" | "size" | "color" | "spin"> & {
+export type IconProps = Pick<FontAwesomeIconProps, "style" | "size" | "color" | "spin" | 'string'> & {
   name: IconName;
 };
 

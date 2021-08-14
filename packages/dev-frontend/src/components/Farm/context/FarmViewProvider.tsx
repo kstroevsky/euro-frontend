@@ -68,9 +68,8 @@ export const FarmViewProvider: React.FC = props => {
       dispatchEvent("UNSTAKE_AND_CLAIM_CONFIRMED");
     } else if (liquidityMiningStake.isZero && !liquidityMiningLQTYReward.isZero) {
       dispatchEvent("UNSTAKE_CONFIRMED");
-    }
-  }, [liquidityMiningStake.isZero, liquidityMiningLQTYReward.isZero, dispatchEvent]);
-
+    }}, [liquidityMiningStake.isZero, liquidityMiningLQTYReward.isZero, dispatchEvent]);
+    
   const provider = {
     view,
     dispatchEvent

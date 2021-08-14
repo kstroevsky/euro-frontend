@@ -36,9 +36,9 @@ export const FrontendRegistrationSuccess: React.FC<FrontendRegistrationSuccessPr
         <Heading sx={{ ml: 3, fontSize: 4 }}>Success!</Heading>
       </Flex>
 
-      <Paragraph sx={{ fontSize: 2 }}>Your frontend is now ready to receive LQTY rewards.</Paragraph>
+      <Paragraph sx={{ fontSize: 2 }}>Your frontend is now ready to receive ERTY rewards.</Paragraph>
     </Box>
 
-    <Button onClick={onDismiss}>Go to Dashboard</Button>
+    <Button onClick={onDismiss}>Go to Vault</Button>
   </>
 );

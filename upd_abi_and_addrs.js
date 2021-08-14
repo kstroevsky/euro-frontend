@@ -1,6 +1,6 @@
 fs = require('fs');
 
-const CONTRACTS_PROJ_PTH = '../Eurity' //place your eurity contracts project path here
+const CONTRACTS_PROJ_PTH = '../euro' //place your eurity contracts project path here
 const ADRESSES_FN = 'localForkDeploymentOutput.json'
 
 const LIB_ETHERS_PTH = './packages/lib-ethers/dist'

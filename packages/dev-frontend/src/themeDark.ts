@@ -22,8 +22,8 @@ const colors = {
   info: baseColors.green,
   invalid: "pink",
 
-  text: "black",
-  background: "white",
+  text: "white",
+  background: "black",
   muted: "#eaebed"
 };
 
@@ -45,7 +45,6 @@ const button: ThemeUIStyleObject = {
   border: 1,
 
   fontWeight: "bold",
-  transition: 'all 0.3s ease',
 
   ":disabled": {
     opacity: 0.5
@@ -70,7 +69,6 @@ const iconButton: ThemeUIStyleObject = {
   padding: 0,
   width: "40px",
   height: "40px",
-  transition: 'all 0.3s ease',
 
   background: "none",
 
@@ -148,7 +146,7 @@ const headerGradient: ThemeUIStyleObject = {
   background: `linear-gradient(90deg, ${colors.background}, ${colors.muted})`
 };
 
-const theme: Theme = {
+const themeDark: Theme = {
   breakpoints: ["48em", "52em", "64em"],
 
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
@@ -273,10 +271,10 @@ const theme: Theme = {
         py: 2,
         pr: 2,
 
-        bg: "white",
+        bg: "black",
 
         borderColor:'muted', 
-        borderBottom:'1px solid lightgray',
+        borderBottom:'1px solid gray',
 
         fontSize: cardHeadingFontSize
       }
@@ -495,4 +493,4 @@ const theme: Theme = {
   }
 };
 
-export default theme;
+export default themeDark;

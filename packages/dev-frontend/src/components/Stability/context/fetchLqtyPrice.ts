@@ -32,6 +32,7 @@ export async function fetchLqtyPrice(lqtyTokenAddress: string) {
       variables: null
     })
   });
+  
   if (!response.ok) {
     return Promise.reject("Network error connecting to Uniswap subgraph");
   }
@@ -41,7 +42,7 @@ export async function fetchLqtyPrice(lqtyTokenAddress: string) {
   if (errors) {
     return Promise.reject(errors);
   }
-
+  console.log(data);
   if (typeof data?.token?.derivedETH === "string" && typeof data?.bundle?.ethPrice === "string") {
     const ethPriceUSD = Decimal.from(data.bundle.ethPrice);
     const lqtyPriceUSD = Decimal.from(data.token.derivedETH).mul(ethPriceUSD);

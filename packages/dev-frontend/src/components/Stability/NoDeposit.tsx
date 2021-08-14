@@ -1,19 +1,30 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useContext } from "react";
+import useResizeAware from 'react-resize-aware';
 import { Card, Heading, Box, Flex, Button } from "theme-ui";
+import { PropertyAssignment } from "typescript";
 import { InfoMessage } from "../InfoMessage";
 import { useStabilityView } from "./context/StabilityViewContext";
 import { RemainingLQTY } from "./RemainingLQTY";
 import { Yield } from "./Yield";
+import { SaveContext } from '../../pages/Farm';
 
-export const NoDeposit: React.FC = props => {
+export const NoDeposit: React.FC = (props) => {
   const { dispatchEvent } = useStabilityView();
+  const [resizeListener, sizes] = useResizeAware();
 
   const handleOpenTrove = useCallback(() => {
     dispatchEvent("DEPOSIT_PRESSED");
   }, [dispatchEvent]);
 
+  const sizer = useContext(SaveContext);
+  
+  useEffect(() => {
+    sizer.setSizeData(sizes);
+  },[sizes, sizer]);
+
   return (
     <Card>
+      {resizeListener}
       <Heading>
         Stability Pool
         <Flex sx={{ justifyContent: "flex-end" }}>
@@ -21,8 +32,8 @@ export const NoDeposit: React.FC = props => {
         </Flex>
       </Heading>
       <Box sx={{ p: [2, 3] }}>
-        <InfoMessage title="You have no LUSD in the Stability Pool.">
-          You can earn ETH and LQTY rewards by depositing LUSD.
+        <InfoMessage title="You have no mEUR in the Stability Pool.">
+          You can earn MATIC and ERTY rewards by depositing mEUR.
         </InfoMessage>
 
         <Flex variant="layout.actions">

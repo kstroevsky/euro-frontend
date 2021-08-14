@@ -44,6 +44,7 @@ export const LiquityProvider: React.FC<LiquityProviderProps> = ({
 }) => {
   const { library: provider, account, chainId } = useWeb3React<Web3Provider>();
   const [config, setConfig] = useState<LiquityFrontendConfig>();
+
   console.log("!config", config)
   console.log("!provider", provider)
   console.log("!account", account)

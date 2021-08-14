@@ -4,7 +4,7 @@ import { ActiveDeposit } from "./ActiveDeposit";
 import { NoDeposit } from "./NoDeposit";
 import { useStabilityView } from "./context/StabilityViewContext";
 
-export const Stability: React.FC = props => {
+export const Stability: React.FC = ( props ) => {
   const { view } = useStabilityView();
 
   switch (view) {

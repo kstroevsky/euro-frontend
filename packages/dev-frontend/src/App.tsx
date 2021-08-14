@@ -1,6 +1,6 @@
-import React from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { Web3ReactProvider } from "@web3-react/core";
-import { Flex, Spinner, Heading, ThemeProvider, Paragraph, Link } from "theme-ui";
+import { Flex, Spinner, Heading, ThemeProvider, Paragraph, Link, Checkbox } from "theme-ui";
 
 import { BatchedWebSocketAugmentedWeb3Provider } from "@liquity/providers";
 import { LiquityProvider } from "./hooks/LiquityContext";
@@ -9,6 +9,7 @@ import { TransactionProvider } from "./components/Transaction";
 import { Icon } from "./components/Icon";
 import { getConfig } from "./config";
 import theme from "./theme";
+import themeDark from "./themeDark";
 
 import { DisposableWalletProvider } from "./testUtils/DisposableWalletProvider";
 import { LiquityFrontend } from "./LiquityFrontend";
@@ -33,6 +34,13 @@ getConfig().then(config => {
   // console.log(config);
   Object.assign(window, { config });
 });
+
+export interface themeCont {
+  themeNameState: any;
+  setThemeNameState: any; 
+}
+
+export const ThemeContext = createContext<themeCont>({themeNameState:'basic', setThemeNameState:''});
 
 const EthersWeb3ReactProvider: React.FC = ({ children }) => {
   return (
@@ -71,6 +79,8 @@ const UnsupportedMainnetFallback: React.FC = () => (
 );
 
 const App = () => {
+  const [themeNameState, setThemeNameState] = useState('basic');
+
   const loader = (
     <Flex sx={{ alignItems: "center", justifyContent: "center", height: "100vh" }}>
       <Spinner sx={{ m: 2, color: "text" }} size="32px" />
@@ -98,19 +108,21 @@ const App = () => {
 
   return (
     <EthersWeb3ReactProvider>
-      <ThemeProvider theme={theme}>
-        <WalletConnector loader={loader}>
-          <LiquityProvider
-            loader={loader}
-            unsupportedNetworkFallback={unsupportedNetworkFallback}
-            unsupportedMainnetFallback={<UnsupportedMainnetFallback />}
-          >
-            <TransactionProvider>
-              <LiquityFrontend loader={loader} />
-            </TransactionProvider>
-          </LiquityProvider>
-        </WalletConnector>
-      </ThemeProvider>
+      <ThemeContext.Provider value={{themeNameState:theme, setThemeNameState: setThemeNameState}}>
+        <ThemeProvider theme={themeNameState === 'dark' ? themeDark : theme} >
+          <WalletConnector loader={loader}>
+            <LiquityProvider
+              loader={loader}
+              unsupportedNetworkFallback={unsupportedNetworkFallback}
+              unsupportedMainnetFallback={<UnsupportedMainnetFallback />}
+            >
+              <TransactionProvider>
+                <LiquityFrontend loader={loader} />
+              </TransactionProvider>
+            </LiquityProvider>
+          </WalletConnector>
+        </ThemeProvider>
+      </ThemeContext.Provider>
     </EthersWeb3ReactProvider>
   );
 };
