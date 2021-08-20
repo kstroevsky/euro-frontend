@@ -41,7 +41,7 @@ const useCanvas = (draw:any, options={}) => {
                     start:start,
                     stop:stop,
                     lineWidth:1, 
-                    xSpeed: 0.01,
+                    xSpeed: 0.003,
                     amplitude: 0.3,
                     offset: i*0.1
                 })
