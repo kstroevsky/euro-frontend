@@ -30,11 +30,11 @@ export const Farm: React.FC = (props) => {
         <Container variant="columns" sx={{ justifyContent: "flex-start" }}>
           <Container variant="left">
             <Stability/>
-            <APRChart width={sizeData.width} height={sizeData.height} />
           </Container>
 
           <Container variant="right">
             <SystemStats />
+            <APRChart width={sizeData.width} height={sizeData.height*1.8} />
           </Container>
         </Container>
       </Container>

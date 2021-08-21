@@ -1,30 +1,20 @@
-import React, { useCallback, useEffect, useContext } from "react";
-import useResizeAware from 'react-resize-aware';
+import React, { useCallback } from "react";
 import { Card, Heading, Box, Flex, Button } from "theme-ui";
 import { PropertyAssignment } from "typescript";
 import { InfoMessage } from "../InfoMessage";
 import { useStabilityView } from "./context/StabilityViewContext";
 import { RemainingLQTY } from "./RemainingLQTY";
 import { Yield } from "./Yield";
-import { SaveContext } from '../../pages/Farm';
 
 export const NoDeposit: React.FC = (props) => {
   const { dispatchEvent } = useStabilityView();
-  const [resizeListener, sizes] = useResizeAware();
 
   const handleOpenTrove = useCallback(() => {
     dispatchEvent("DEPOSIT_PRESSED");
   }, [dispatchEvent]);
 
-  const sizer = useContext(SaveContext);
-  
-  useEffect(() => {
-    sizer.setSizeData(sizes);
-  },[sizes, sizer]);
-
   return (
     <Card>
-      {resizeListener}
       <Heading>
         Stability Pool
         <Flex sx={{ justifyContent: "flex-end" }}>

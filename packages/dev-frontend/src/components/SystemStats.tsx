@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
+import useResizeAware from 'react-resize-aware';
 import { Card, Heading, Link, Box, Text } from "theme-ui";
 import { useLocation } from 'react-router-dom'
 import { AddressZero } from "@ethersproject/constants";
 import { Decimal, Percent, LiquityStoreState } from "@liquity/lib-base";
 import { useLiquitySelector } from "@liquity/lib-react";
-
+import { SaveContext } from '../pages/Farm';
 import { useLiquity } from "../hooks/LiquityContext";
 import { COIN, GT } from "../strings";
 import { Statistic } from "./Statistic";  
@@ -69,6 +70,19 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
     }
   } = useLiquity();
 
+  const [resizeListener, sizes] = useResizeAware();
+
+  const sizer = useContext(SaveContext);
+  
+  useEffect(() => {
+    if (sizer.setSizeData !== '') {
+      sizer.setSizeData(sizes);
+    }
+    if (sizes.width == 0) {
+      sizer.setSizeData({width: window.innerWidth, height: 150});
+    }
+  },[sizes, sizer]);
+
   const {
     numberOfTroves,
     price,
@@ -90,7 +104,7 @@ export const SystemStats: React.FC<SystemStatsProps> = ({ variant = "info", show
   return (
     <Card {...{ variant }}>
       {showBalances && <Balances />}
-
+      {resizeListener}
       <Heading>
         <Box sx={{mr:'12px', float:'left'}}><Icon name='chart-line'/></Box>
         Liquity statistics
